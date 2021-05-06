@@ -1,5 +1,6 @@
 from application import app, db
 from application.models import Tasks
+from flask import render_template
 
 @app.route('/add')
 def add():
@@ -13,9 +14,9 @@ def add():
 @app.route('/home')
 def home():
     all_task = Tasks.query.all()
-    message = ""
-    for task in all_task:
-        message += task.description + "\n"
+    output = ""
+    return render_template("index.html", title="Home", all_task=all_task)
+    
     return message
 
 @app.route('/complete/<int:id>')
